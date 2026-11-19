@@ -9,6 +9,12 @@
 <div class="busy" id="busy" hidden><b id="busyT"></b><span id="busyP"></span></div>
 <div id="groups"></div>
 </div>
+<div class="modal" id="mod" hidden><div class="box" role="dialog" aria-labelledby="modH">
+<div class="mh" id="modH">Nu a funcționat</div><div class="ms" id="modSong"></div>
+<label for="modTxt">Motiv</label><textarea id="modTxt" rows="4" placeholder="Labelul a refuzat, drepturile pentru România sunt deja date"></textarea>
+<div class="err" id="modErr"></div>
+<div class="mb"><button class="lk" id="modDel">Șterge marcajul</button><span class="sp"></span><button class="cn" id="modNo">Anulează</button><button class="fx" id="modOk">Salvează</button></div>
+</div></div>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>
 <script src="config.js"></script><script src="db.js"></script><script src="engine.js"></script><script src="fetcher.js"></script><script src="score.js"></script><script src="app.js"></script>
 </body></html>
