@@ -4,7 +4,9 @@
 <body><div class="wrap">
 <div class="top"><span class="brand">LICENSING SCOUT</span><span class="wk" id="wk"></span><span class="sp"></span>
 <button class="tb on" data-t="all">Piese</button><button class="tb" data-t="done">Preluate <span id="nd">0</span></button><a class="tb" href="metodologie.html">Indici</a>
+<span class="auto" id="auto">Auto <select id="ad"><option value="-1">Oprit</option><option value="1">Luni</option><option value="2">Marți</option><option value="3">Miercuri</option><option value="4">Joi</option><option value="5">Vineri</option><option value="6">Sâmbătă</option><option value="0">Duminică</option></select><input id="at" type="time" value="16:00"></span>
 <button class="fx" id="fx" title="Update recomandat miercurea">Fetch</button></div>
+<div class="busy" id="busy" hidden><b id="busyT"></b><span id="busyP"></span></div>
 <div id="groups"></div>
 </div>
 <script src="https://cdn.sheetjs.com/xlsx-0.20.3/package/dist/xlsx.full.min.js"></script>

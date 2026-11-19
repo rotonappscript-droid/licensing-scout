@@ -49,19 +49,34 @@ function render(){
  document.querySelectorAll('.pb').forEach(b=>b.onclick=async()=>{const k=b.dataset.id,was=done.has(k);was?done.delete(k):done.add(k);render();
    try{was?await DB.del('preluate','song_id',k):await DB.upsert('preluate',[{song_id:k}],'song_id');}catch(e){was?done.add(k):done.delete(k);render();status('Eroare la salvare');}});
  document.querySelectorAll('th[data-k]').forEach(t=>t.onclick=()=>{const g=t.dataset.g,k=t.dataset.k;const s=S[g];if(s[0]===k)s[1]=-s[1];else{s[0]=k;s[1]=['title','artist','label','isrc','pos'].includes(k)?1:-1;}render();});}
-const status=t=>{$('#wk').textContent=t;};
+const status=t=>{$('#wk').textContent=t;if(!$('#busy').hidden)$('#busyP').textContent=t;};
+function busyOn(auto){$('#busyT').textContent=auto?'Auto-fetch în curs. Așteaptă să se termine, datele din pagină se actualizează la final.':'Fetch în curs. Așteaptă să se termine, datele din pagină se actualizează la final.';$('#busyP').textContent='';$('#busy').hidden=false;$('#groups').classList.add('stale');}
+function busyOff(){$('#busy').hidden=true;$('#groups').classList.remove('stale');}
 const label=()=>status(D?`UPFR W${D.week} ${D.year}`:'');
 async function load(){
  D=await DB.latest();if(D)D.songs.forEach(x=>x.score=SCORE.score(x,D));
  done=new Set(await DB.preluate());label();render();}
 document.querySelectorAll('button.tb').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tb').forEach(x=>x.classList.remove('on'));b.classList.add('on');tab=b.dataset.t;render();});
-$('#fx').onclick=async e=>{const b=$('#fx');b.disabled=true;b.textContent='…';
+/* Auto-fetch: ziua și ora se aleg din pagină; rulează dacă pagina e deschisă atunci sau la prima deschidere de după. */
+const LS={get:(k,d)=>{try{const v=localStorage.getItem(k);return v==null?d:v;}catch(e){return d;}},set:(k,v)=>{try{localStorage.setItem(k,v);}catch(e){}}};
+const ad=$('#ad'),at=$('#at');let busy=false;
+ad.value=LS.get('ls_auto_day','3');at.value=LS.get('ls_auto_time','16:00');
+ad.onchange=()=>{LS.set('ls_auto_day',ad.value);};at.onchange=()=>{LS.set('ls_auto_time',at.value||'16:00');};
+function lastSlot(){const d=+ad.value;if(d<0)return 0;const [h,m]=(at.value||'16:00').split(':').map(Number),n=new Date(),s=new Date(n);
+ s.setHours(h,m||0,0,0);s.setDate(s.getDate()-((s.getDay()-d+7)%7));if(s>n)s.setDate(s.getDate()-7);return s.getTime();}
+async function doFetch(force,auto){if(busy)return;busy=true;const b=$('#fx');b.disabled=true;b.textContent='…';busyOn(auto);
  try{
-   const local=FETCHER.supported()&&(e.shiftKey||!D||await FETCHER.hasFolder());
-   if(local)await FETCHER.run(status,e.shiftKey);
-   await load();
- }catch(err){status(err&&err.name==='AbortError'?'':String(err.message||err));setTimeout(label,6000);}
- b.disabled=false;b.textContent='Fetch';};
+   const local=FETCHER.supported()&&(auto||force||!D||await FETCHER.hasFolder());
+   if(local){await FETCHER.run(status,force,auto);LS.set('ls_last_fetch',String(Date.now()));}
+   busyOff();await load();
+ }catch(err){busyOff();status(err&&err.name==='AbortError'?'':String(err.message||err));setTimeout(label,6000);}
+ b.disabled=false;b.textContent='Fetch';busy=false;}
+window.addEventListener('beforeunload',e=>{if(busy){e.preventDefault();e.returnValue='';}});
+async function autoCheck(){const s=lastSlot();if(!s||+LS.get('ls_last_fetch','0')>=s||!FETCHER.supported())return;
+ if(await FETCHER.canAuto())doFetch(false,true);}
+$('#fx').onclick=e=>doFetch(e.shiftKey,false);
+setInterval(autoCheck,60000);
 if(!DB.hasKey()){document.body.innerHTML='';return;}
-load().catch(e=>status(String(e.message||e)));
+load().then(autoCheck).catch(e=>status(String(e.message||e)));
+if(!FETCHER.supported())$('#auto').style.display='none';
 })();

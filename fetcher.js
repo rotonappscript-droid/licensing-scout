@@ -57,8 +57,9 @@ async function getRoot(force){
 window.FETCHER={
   supported:()=>'showDirectoryPicker' in window,
   hasFolder:async()=>!!(await iget('handles','root')),
-  async run(status,force){
-    const root=await getRoot(force),{up,mr}=await files(root);
+  canAuto:async()=>{const h=await iget('handles','root');if(!h)return false;try{return (await h.queryPermission({mode:'read'}))==='granted';}catch(e){return false;}},
+  async run(status,force,auto){
+    const root=auto?await iget('handles','root'):await getRoot(force),{up,mr}=await files(root);
     if(!up.length||!mr.length)throw new Error('Alege folderul Roton UPFR Chart Analysis');
     const U=[],M=[];
     for(let n=0;n<up.length;n++)U.push(await cached(up[n],b=>parseUpfr(b,up[n].year,up[n].week),()=>status(`UPFR ${n+1}/${up.length}`)));
