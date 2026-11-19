@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ro">
+<head><meta charset="utf-8"><meta name="robots" content="noindex,nofollow"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Licensing Scout · Indici</title><link rel="stylesheet" href="style.css"></head>
+<body><div class="wrap">
+<div class="top"><span class="brand">LICENSING SCOUT</span><span class="wk" id="wk"></span><span class="sp"></span>
+<a class="tb" href="index.html">Piese</a><a class="tb on" href="metodologie.html">Indici</a></div>
+<div class="doc">
+<h1>Indici și calcul</h1>
+<p>Exemplele sunt calculate pe datele săptămânii curente. Update-ul se face miercurea: marțea vine raportul UPFR pentru săptămâna anterioară (marți–luni).</p>
+
+<h2>Categorii</h2>
+<p>Două categorii, cu scoruri separate: Secured și Early. Early are două subcategorii: Relevante și De urmărit.</p>
+<dl>
+<dt>Secured</dt><dd>În Top 100 UPFR în săptămâna curentă, de cel puțin 3 săptămâni.</dd>
+<dt>Early · Relevante</dt><dd>În Top 100 de 1–2 săptămâni, sau sub Top 100 cu Apropiere de Top 100 ≥ 50% și Trend ↑.</dd>
+<dt>Early · De urmărit</dt><dd>Sub Top 100, lansare 2025–2026, Apropiere de Top 100 ≥ 25%, fără condițiile de la Early.</dd>
+<dt>Excluse</dt><dd>Roton și Green Tree; majori (Universal, Sony, Warner și labelurile lor, după numele labelului și codul ISRC); labeluri românești; piese de sub Top 100 lansate înainte de 2025, fără ISRC și fără dată de lansare, sau care au stat peste 4 săptămâni în Top 100.</dd>
+<dt>Ordine</dt><dd>Descrescător după Scor, separat pe fiecare categorie.</dd>
+</dl>
+
+<h2>Poziție UPFR</h2>
+<dl><dt>Definiție</dt><dd>Locul în UPFR Top 100 Airplay în săptămâna curentă. Gol sub Top 100.</dd><dt>Sursă</dt><dd>Chartul UPFR.</dd></dl>
+
+<h2>Săptămâni în Top 100</h2>
+<dl><dt>Definiție</dt><dd>Numărul de săptămâni în care piesa a apărut în Top 100, în 2024–2026.</dd>
+<dt>Calcul</dt><dd><span class="f">număr de charturi UPFR săptămânale în care apare piesa</span></dd></dl>
+
+<h2>Trend</h2>
+<dl><dt>Definiție</dt><dd>Direcția impactului (audiența difuzărilor) în ultimele 3 săptămâni.</dd>
+<dt>Calcul</dt><dd><span class="f">↑ = impact în creștere 2 săptămâni consecutive (S-2 &lt; S-1 &lt; S)</span>
+<span class="f">↓ = impact în scădere 2 săptămâni consecutive (S-2 &gt; S-1 &gt; S)</span>
+<span class="f">→ = orice altă combinație</span>
+Impactul e cel din UPFR în săptămânile în care piesa e în Top 100 și cel estimat din Vericast în rest.</dd>
+<dt>Exemplu</dt><dd id="ex_tr"></dd></dl>
+
+<h2>Cotă de piață %</h2>
+<dl><dt>Definiție</dt><dd>Partea piesei din audiența totală a Top 100 în săptămâna curentă. Doar pentru piese din Top 100.</dd>
+<dt>Calcul</dt><dd><span class="f">Impact piesă ÷ Impact total Top 100 × 100</span></dd>
+<dt>Exemplu</dt><dd id="ex_sh"></dd>
+<dt>Sursă</dt><dd>Chartul UPFR, coloana Impact. Aceeași metodă ca foaia Market Share Labels.</dd></dl>
+
+<h2>Cotă estimată / săpt. %</h2>
+<dl><dt>Definiție</dt><dd>Cota de piață medie pe săptămână pe care piesa ar aduce-o în următoarele 8 săptămâni, licențiată acum la 100%. 0 pentru piesele care nu sunt în Top 100.</dd>
+<dt>Calcul</dt><dd><span class="f">Cotă estimată = Cotă de piață % × Multiplicator ÷ 8</span>
+Multiplicator = suma cotelor din următoarele 8 săptămâni ÷ cota din săptămâna de start, medie pe toate piesele UPFR 2024–2026 cu aceeași bandă de poziție și aceeași vechime în Top 100. Piesele ieșite din Top 100 intră cu cotă 0. 8 = cota se păstrează.<div id="t_mu"></div></dd>
+<dt>Exemplu</dt><dd id="ex_es"></dd>
+<dt>Co-licență</dt><dd>Cotă estimată × procentul Roton din deal.</dd></dl>
+
+<h2>Apropiere de Top 100 %</h2>
+<dl><dt>Definiție</dt><dd>Cât de aproape e o piesă de sub Top 100 de pragul de intrare. 100% = impact egal cu locul 100. Doar pentru piese de sub Top 100.</dd>
+<dt>Calcul</dt><dd><span class="f">Impact estimat ÷ Impact locul 100 × 100</span>
+<span class="f">Impact estimat = Σ posturi (difuzări ≥ 60 s × Audiență per difuzare a postului)</span>
+<span class="f">Audiență per difuzare = Audiență ÷ Difuzări, din foaia Market Share Channels</span></dd>
+<dt>Exemplu</dt><dd id="ex_nr"></dd>
+<dt>Verificare</dt><dd id="cal"></dd>
+<dt>Sursă</dt><dd>MatchReport Vericast (BMAT) al săptămânii, fără muzică de producție.</dd></dl>
+
+<h2>Șansă de intrare %</h2>
+<dl><dt>Definiție</dt><dd>Cât de des au intrat în Top 100, în următoarele 4 săptămâni, piese aflate în aceeași situație. Doar pentru piese de sub Top 100.</dd>
+<dt>Calcul</dt><dd><span class="f">piese intrate în 4 săptămâni ÷ piese din aceeași grupă × 100</span>
+Grupa = Apropiere de Top 100 (25–50%, 50–100%, ≥100%) × Trend ↑ (da / nu).</dd>
+<dt>Istoric</dt><dd>Piese lansate 2025–2026, niciodată în Top 100 înainte, Vericast W27–W46 2026, pe săptămâni-piesă. Pentru reintrări se folosește aceeași grupă.<div id="t_pe"></div></dd>
+<dt>Exemplu</dt><dd id="ex_pe"></dd></dl>
+
+<h2>Lansare</h2>
+<dl><dt>Definiție</dt><dd>Data din Songstats. Dacă lipsește, anul din codul ISRC, în gri.</dd></dl>
+
+<h2>Scor Secured și Scor Early</h2>
+<dl><dt>Definiție</dt><dd>Două scoruri diferite, fiecare de la 0 la 100, care combină indicii. Scor Secured ordonează doar piesele Secured, Scor Early doar piesele Early. Cele două <strong>nu se compară</strong>: 84 Early nu înseamnă cât 84 Secured. Pentru comparație între categorii se folosește Cotă estimată / săpt. Early · De urmărit folosește formula Early înmulțită cu 0,5.</dd>
+<dt>Calcul</dt><dd><span class="f">Scor = Σ (pondere × valoare normalizată)</span>Fiecare indice e adus pe o scară de la 0 la 1 înainte de ponderare.</dd>
+<dt>Scor Secured</dt><dd><div id="t_ws"></div></dd>
+<dt>Exemplu</dt><dd id="ex_ss"></dd>
+<dt>Scor Early</dt><dd><div id="t_we"></div>Pentru piesele Early deja în Top 100, Șansă de intrare și Apropiere de Top 100 = 1.</dd>
+<dt>Exemplu</dt><dd id="ex_se"></dd>
+<dt>De urmărit</dt><dd><span class="f">Scor = Scor Early × 0,5</span></dd>
+<dt>Exemplu</dt><dd id="ex_sw"></dd></dl>
+</div></div>
+<script src="config.js"></script><script src="db.js"></script><script src="score.js"></script>
+<script>
+(async function(){if(!DB.hasKey()){document.body.innerHTML='';return;}window.SCOUT_DATA=await DB.latest();if(!window.SCOUT_DATA)return;{
+const D=window.SCOUT_DATA,$=i=>document.getElementById(i),f=(x,d=2)=>Number(x).toLocaleString('ro-RO',{minimumFractionDigits:d,maximumFractionDigits:d}),cl=t=>t.replace(/\s*\((official|ft|feat)[^)]*\)/gi,'').trim();
+D.songs.forEach(x=>x.score=SCORE.score(x,D));$('wk').textContent=`UPFR W${D.week} ${D.year}`;
+const by=c=>D.songs.filter(s=>s.cat===c).sort((a,b)=>b.score-a.score);
+const sec=by('secured'),top=sec[0],ex=sec[1]||sec[0],sub=D.songs.filter(s=>s.pos==null&&s.p_enter!=null).sort((a,b)=>b.p_enter-a.p_enter)[0];
+const ar={'urcă':'↑','coboară':'↓','stabilă':'→'},t3=x=>x.trend_series.map(v=>f(v,0)).join(' → ')+' = '+ar[x.trend];
+const ts=D.songs.find(x=>x.trend==='stabilă'&&x.trend_series[1]<x.trend_series[0])||D.songs[0],tu=D.songs.find(x=>x.trend==='urcă');
+$('ex_tr').innerHTML=`${cl(tu.title)}: ${t3(tu)}<br>${cl(ts.title)}: ${t3(ts)} (a scăzut, apoi a crescut)`;
+$('ex_sh').textContent=`${cl(top.title)}: ${f(top.impact,0)} ÷ ${f(D.total_impact,0)} × 100 = ${f(top.share)}%`;
+$('ex_es').textContent=`${cl(ex.title)}: ${f(ex.share)} × ${f(ex.mult)} ÷ 8 = ${f(ex.value8)}% (poziție ${ex.mult_cell} săptămâni, ${ex.mult_n} cazuri)`;
+if(sub){$('ex_nr').textContent=`${cl(sub.title)}: ${f(sub.impact,0)} ÷ ${f(D.threshold100,0)} × 100 = ${f(sub.impact_ratio,0)}%`;
+ $('ex_pe').textContent=`${cl(sub.title)}: Apropiere ${sub.impact_ratio}%, Trend ${ar[sub.trend]} → ${sub.p_k} din ${sub.p_n} = ${sub.p_enter}%`;}
+$('cal').textContent=`Pe piesele din Top 100, raportul median Impact estimat ÷ Impact UPFR = ${D.calib}.`;
+let t='<table><tr><th>Poziție</th><th>Săpt. 1–4</th><th>5–12</th><th>13–25</th><th>26+</th></tr>';
+['1-10','11-30','31-60','61-100'].forEach(b=>{t+=`<tr><td>#${b}</td>`+['1-4','5-12','13-25','26+'].map(a=>{const v=D.mult[`${b}|${a}`];return `<td>${v?f(v[0])+' ('+v[1]+')':'–'}</td>`;}).join('')+'</tr>';});
+$('t_mu').innerHTML=t+'</table>';
+let p='<table><tr><th>Apropiere de Top 100</th><th>Trend ↑</th><th>Altfel</th></tr>';
+['25-50%','50-100%','≥100%'].forEach(b=>{const g=v=>v&&v[1]?`${Math.round(100*v[0]/v[1])}% (${v[0]}/${v[1]})`:'–';p+=`<tr><td>${b}</td><td>${g(D.penter[b+'|urcă 2 săpt'])}</td><td>${g(D.penter[b+'|altfel'])}</td></tr>`;});
+$('t_pe').innerHTML=p+'</table>';
+$('t_ws').innerHTML='<table><tr><th>Indice</th><th>Pondere</th><th>Normalizare (0–1)</th></tr><tr><td>Cotă estimată / săpt.</td><td>50</td><td>Cotă estimată ÷ 2, maxim 1</td></tr><tr><td>Cotă de piață</td><td>20</td><td>Cotă ÷ 3, maxim 1</td></tr><tr><td>Trend</td><td>15</td><td>↑ = 1 · → = 0,5 · ↓ = 0</td></tr><tr><td>Săptămâni în Top 100</td><td>15</td><td>1 − săptămâni ÷ 52, minim 0</td></tr></table>';
+$('t_we').innerHTML='<table><tr><th>Indice</th><th>Pondere</th><th>Normalizare (0–1)</th></tr><tr><td>Șansă de intrare</td><td>30</td><td>Șansă ÷ 50, maxim 1</td></tr><tr><td>Apropiere de Top 100</td><td>20</td><td>Apropiere ÷ 100, maxim 1</td></tr><tr><td>Trend</td><td>20</td><td>↑ = 1 · → = 0,5 · ↓ = 0</td></tr><tr><td>Cotă estimată / săpt.</td><td>15</td><td>Cotă estimată ÷ 0,5, maxim 1</td></tr><tr><td>Lansare</td><td>15</td><td>1 − luni de la lansare ÷ 12, minim 0; fără dată = 0,5</td></tr></table>';
+const line=(x)=>{const P=SCORE.parts(x,D),W=x.cat==='secured'?SCORE.W.secured:SCORE.W.early;let r=Object.keys(W).map(k=>`${W[k]} × ${f(P[k])}`).join(' + ');return `${cl(x.title)}: ${x.cat==='early_watch'?'('+r+') × 0,5':r} = ${x.score}`;};
+$('ex_ss').textContent=line(top);const e=by('early_rel')[0],w=by('early_watch')[0];if(e)$('ex_se').textContent=line(e);if(w)$('ex_sw').textContent=line(w);
+}})();
+</script></body></html>
